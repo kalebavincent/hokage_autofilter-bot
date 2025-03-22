@@ -696,6 +696,43 @@ async def channel_info(bot, message):
             f.write(text)
         await message.reply_document(file)
         os.remove(file)
+    
+@Client.on_message(filters.command('groups') & filters.user(ADMINS))
+async def groupe_info(bot, message):
+    GROUPE = await db.get_all_chats()
+    
+    if not GROUPE:
+        await message.reply("❌ Aucun groupe indexé trouvé.")
+        return
+
+    text = '📑 **Liste des Groupes :**\n\n'
+    for groupe in GROUPE:
+        groupe_id = groupe.get('id', 'N/A')
+        groupe_title = groupe.get('title', 'N/A')
+        chat_status = groupe.get('chat_status', {})
+        is_disabled = chat_status.get('is_disabled', False)
+        reason = chat_status.get('reason', 'Aucune raison spécifiée')
+
+        text += (
+            f"🆔 **ID :** `{groupe_id}`\n"
+            f"📛 **Titre :** {groupe_title}\n"
+            f"🔒 **Statut :** {'Désactivé' if is_disabled else 'Activé'}\n"
+            f"📝 **Raison :** {reason}\n\n"
+        )
+
+    text += f"**Total :** {len(GROUPE)}"
+
+    if len(text) < 4096:
+        await message.reply(text)
+    else:
+        file = 'all_groupes.txt'
+        try:
+            with open(file, 'w', encoding='utf-8') as f:
+                f.write(text)
+            await message.reply_document(file)
+        finally:
+            if os.path.exists(file):
+                os.remove(file)
 
 
 @Client.on_message(filters.command('logs') & filters.user(ADMINS))
@@ -778,7 +815,7 @@ async def delete_all_index(bot, message):
 @Client.on_callback_query(filters.regex(r'^autofilter_delete'))
 async def delete_all_index_confirm(bot, message):
     await Media.collection.drop()
-    await message.answer('Maintenu par : HP')
+    await message.answer('Maintenu par : Hyosh Coder')
     await message.message.edit('Tous les fichiers indexés ont été supprimés avec succès ✅')
 
 @Client.on_message(filters.command('settings'))
@@ -964,7 +1001,7 @@ async def settings(client, message):
                 reply_to_message_id=message.id
             )
 
-@Client.on_message(filters.command('set_template'))
+@Client.on_message(filters.command('set_template')  & filters.user(ADMINS))
 async def save_template(client, message):
     sts = await message.reply("Vérification du modèle...")
     userid = message.from_user.id if message.from_user else None

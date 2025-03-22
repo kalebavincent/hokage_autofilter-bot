@@ -106,7 +106,7 @@ async def give_filter(client, message):
                 parse_mode=enums.ParseMode.HTML,
                 reply_markup=InlineKeyboardMarkup(
                         [[
-                            InlineKeyboardButton('• Rᴇᴊᴏɪɢɴᴇᴢ ɴᴏᴛʀᴇ ɢʀᴏᴜᴘᴇ ᴅᴇ ғɪʟᴍs •', url ='https://telegram.me/hokageclub')
+                            InlineKeyboardButton('• Rᴇᴊᴏɪɢɴᴇᴢ ɴᴏᴛʀᴇ ɢʀᴏᴜᴘᴇ ᴅᴇ ғɪʟᴍs •', url ='https://telegram.me/BingeFinderclub')
                         ]]
                     )
                 )
@@ -120,7 +120,7 @@ async def pm_text(bot, message):
     if user_id in ADMINS: return # Ignorer les admins
     await message.reply_text(
          text="<b>ʜᴇʏ ʙʀᴏ/sɪs, ᴛᴜ ɴᴇ ᴘᴇᴜx ᴘᴀs ᴏʙᴛᴇɴɪʀ �ᴇ ғɪᴄʜɪᴇʀs ɪᴄɪ... \n\nRᴇᴊᴏɪɴs ɴᴏᴛʀᴇ ɢʀᴏᴜᴘᴇ ᴇᴛ ғᴀɪᴛs ᴛᴀ ʀᴇᴄʜᴇʀᴄʜᴇ ɪᴄɪ</b>",   
-         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("• Rᴇᴊᴏɪɴs ɴᴏᴛʀᴇ ɢʀᴏᴜᴘᴇ ᴅᴇ ғɪʟᴍs • ​ ", url=f"https://telegram.me/hokageclub")]]), disable_web_page_preview=True
+         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("• Rᴇᴊᴏɪɴs ɴᴏᴛʀᴇ ɢʀᴏᴜᴘᴇ ᴅᴇ ғɪʟᴍs • ​ ", url=f"https://telegram.me/BingeFinderclub")]]), disable_web_page_preview=True
     )
     await bot.send_message(
         chat_id=LOG_CHANNEL,
